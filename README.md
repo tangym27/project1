@@ -1,8 +1,7 @@
-# project1
-Project 1: Shell[ing] out commands.
+# project 1: Shell[ing] out commands.
 
-Maia and MiSHELL (its like maya and miguel haha)
-by Maia Brydon and Michelle Tang 
+# Maia and MiSHELL (its like maya and miguel haha)
+# by Maia Brydon and Michelle Tang 
 
 Features:
 	Compiles!
@@ -15,13 +14,14 @@ Bugs:
 	
 Files & Function Headers:
 shell.c
-	Handles all line parsing fucntions
+	Handles everything. It's so shellfish. 
+	
 	/*======== int main() ==========
-  The main functions. Ha.
+  	The main functions. Ha.
 	====================*/
   
  	/*======== int command_line() ==========
-  Reads prompts from the buffer.
+  	Reads prompts from the buffer.
 	====================*/
 
 	/*======== char ** parse_line( ) ==========
@@ -32,7 +32,3 @@ shell.c
 	If line contains multiple tokens separated by delim, this 
 	function will put each token into an array of strings
 	====================*/
-
-	
-shell.c
-	Handles everything. It's so shellfish. 
