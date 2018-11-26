@@ -1,5 +1,3 @@
-# project 1: Shell[ing] out commands.
-
 # Maia and MiSHELL (its like maya and miguel haha)
 # by Maia Brydon and Michelle Tang 
 
