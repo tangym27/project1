@@ -7,8 +7,6 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <limits.h>
-// #DEFINE READ 0
-// #DEFINE WRITE 1
 
 char * command_line() {
   char * prompt=(char *)calloc(256,1);
@@ -31,11 +29,12 @@ char ** parse_args( char * line, char * limit ){
   return args;
 }
 
-int special(char * args){
+int find_redirect(char * args){
   if(strstr(args,"|")){
     printf("there is a pipe here\n" );
     return 1;
   }
+  /* @here : check for < and >, which will return a different num */
   return 0;
 }
 
@@ -75,12 +74,19 @@ int main(){
     printf("======================\n" );
     printf("full_araaar[%d]: %s\n", i, full_arr[i]);
     int j = 0;
-    if (special(full_arr[i])){
-        char ** full_arr2 = parse_args(str, "|");
-        redirect_pipe(full_arr2);
+    //CHECKS FOR SPECIAL CHARACTERS: AKA HANDLES PIPING.
+    int redirect_num =  find_redirect(full_arr[i]);
+    if ( redirect_num ){
+        if (redirect_num == 1) { // pipe num is 1
+          // SEPARATES LS|WC INTO LS AND WC
+          char ** full_arr2 = parse_args(str, "|");
+          redirect_pipe(full_arr2);
+        }
+        /*
+        @ here : if redirect_num = blah -> handle other redirection
+         */
     }
     else{
-      printf("oh no \n" );
       char ** arr = parse_args(full_arr[i] , " ");
       while(arr[j]){
         printf("arr[%d]: %s\n", j, arr[j]);
@@ -106,7 +112,7 @@ int main(){
               int child_id = wait(&status);
             }
           }
-    }
+        }
     i++;
   }
 }
