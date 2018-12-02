@@ -73,7 +73,7 @@ int main(){
   char ** full_arr = parse_args(str, ";");
   while(full_arr[i]){
     printf("======================\n" );
-    printf("full_arr[%d]: %s\n", i, full_arr[i]);
+    printf("full_araaar[%d]: %s\n", i, full_arr[i]);
     int j = 0;
     if (special(full_arr[i])){
         char ** full_arr2 = parse_args(str, "|");
@@ -106,8 +106,8 @@ int main(){
               int child_id = wait(&status);
             }
           }
-      i++;
     }
+    i++;
   }
 }
   printf("finished the full_arr\n");
