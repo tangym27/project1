@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <limits.h>
+// #DEFINE READ 0
+// #DEFINE WRITE 1
 
 char * command_line() {
   char * prompt=(char *)calloc(256,1);
@@ -29,48 +31,56 @@ char ** parse_args( char * line, char * limit ){
   return args;
 }
 
-int change (char * dir){
-    char cwd[PATH_MAX+100000];
-    if (getcwd(cwd, sizeof(cwd)) != NULL) {
-      printf("Current working dir: %s\n", cwd);
-      char * dir_holder = malloc(50);
-    //  char * dir = malloc(50);
-     // printf("Enter in directory you want to look in ie '/..' \n");
-    // fgets(dir_holder, 50, stdin);
-  //    for (int j = 1; j < strlen(dir_holder)-2; j++){
-  //       printf("asize%lu\n", strlen(str_holder) );
-  //      dir[j-1] = dir_holder[j];
-  //  int success = chdir("/Users/mtang/Documents/Systems/project1/..");
-  // }
-      strcat(cwd, "/");
-      strcat(cwd, dir );
-      printf("cwd %s\n", cwd );
-      int success = chdir(cwd);
-      printf("chdir %d\n", success );
-    } else {
-        perror("getcwd() error");
-        return 1;
+int special(char * args){
+  if(strstr(args,"|")){
+    printf("there is a pipe here\n" );
+    return 1;
+  }
+  return 0;
+}
+
+int redirect_pipe(char ** args){
+    printf("larg[0]: %s\n",args[0] );
+    printf("arg[1]: %s\n",args[1] );
+    char * input  = args[0];
+    char * output = args[1];
+    char line[256];
+    char cmd[256];
+
+    FILE *read=popen(input,"r");
+
+    while (fgets(line,256,read)) {
+      line[sizeof(line)-1] =0;
+      strcat(cmd,line);
+      // printf("temp: \n%s",temp );
+      // printf("s: \n%s",s );
+      // printf("----\n" );
     }
+    pclose(read);
+    FILE *write=popen(output,"w");
+
+    fprintf(write,"%s",cmd); //send s to write
+    pclose(write);
     return 0;
 }
 
-int shell_exit(){
-  printf("we have exited the 'bash'\n" );
-  exit(0);
-}
-
 int main(){
-  int status, astatus;
-
+  int status;
   char* str = malloc(50);
   while (1){
-    int i = 0;
-    str = command_line();
-    char ** full_arr = parse_args(str, ";");
-    while(full_arr[i]){
-      printf("======================\n" );
-      printf("full_arr[%d]: %s\n", i, full_arr[i]);
-      int j = 0;
+  int i = 0;
+  str = command_line();
+  char ** full_arr = parse_args(str, ";");
+  while(full_arr[i]){
+    printf("======================\n" );
+    printf("full_arr[%d]: %s\n", i, full_arr[i]);
+    int j = 0;
+    if (special(full_arr[i])){
+        char ** full_arr2 = parse_args(str, "|");
+        redirect_pipe(full_arr2);
+    }
+    else{
+      printf("oh no \n" );
       char ** arr = parse_args(full_arr[i] , " ");
       while(arr[j]){
         printf("arr[%d]: %s\n", j, arr[j]);
@@ -99,6 +109,7 @@ int main(){
       i++;
     }
   }
+}
   printf("finished the full_arr\n");
   return 0;
 }
