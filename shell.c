@@ -71,44 +71,26 @@ int redirect_pipe(char ** args){
 }
 
 int redirect_stdout(char ** args){
-//  args[0][sizeof(args[0])-1] = 0;
-  char * file0 = args[0];
-  char * file1 = args[1];
-  //  printf("0: [%s], 1: [%s], 2: [%s]\n", args[0], args[1], args[2]);
-  int child = fork();
-  char * cur_dir = malloc( 256);
-  getcwd(cur_dir, 256);
-  if (child){
-    int status;
-    int child_pid = wait(&status);
-  char * file_path = strcat( cur_dir, "/");
-  file_path = strcat( file_path, args[1]);
-  printf( "filepath: %s\n", file_path);
   int file_desc0 = open( "file.txt", O_WRONLY | O_TRUNC);
-  dup2( file_desc0, 1);
+  dup2( file_desc0, STDOUT_FILENO);
   printf("tofile??\n");
-  // int status;
-  // int child_pid = wait(&status);
- }
-  else{
-    execvp( args[0], args);
-  }
-  //dup2( file_desc0, file_desc0);
-  // char * file_path = strcat( chrdir(args[0]), args[0]);
-  // int file_desc0 = open( file_path, O_WRONLY);
-  // dup2( file_dec0, STDOUT_FILENO);
   return 0;
 }
 
-// int redirect_file(char ** args){
-//   char * file0 = args[0];
-//   char * file1 = args[1];
-//
-//   char * file_path = strcat( chrdir(args[0]), args[0]);
-//   int file_desc0 = open( file_path, O_RDONLY);
-//   dup2( STDIN_FILENO, file_desc0);
-//   return 0;
-// }
+int redirect_file(char ** args){
+  args[0][sizeof(args[0])-1] = 0;
+  char * file0 = args[0];
+  char * file1 = args[1];
+
+  char * cur_dir = malloc( 256);
+  getcwd(cur_dir, 256);
+
+  char * file_path = strcat( cur_dir, "/");
+  file_path = strcat( file_path, args[0]);
+  int file_desc0 = open( file_path, O_RDONLY);
+  dup2( STDIN_FILENO, file_desc0);
+  return 0;
+}
 
 int main(){
   int status;
@@ -130,6 +112,11 @@ int main(){
           char ** full_arr2 = parse_args(str, "|");
           redirect_pipe(full_arr2);
         }
+        // if (redirect_num == 2) { // stdout to file is 2
+        //   int file_desc0 = open( "file.txt", O_WRONLY | O_TRUNC);
+        //   dup2( file_desc0, STDOUT_FILENO);
+        //   printf("tofile??\n");
+        // }
         if (redirect_num == 2) { // stdout to file is 2
           char ** full_arr3 = parse_args(str, ">");
           redirect_stdout(full_arr3);
@@ -162,12 +149,17 @@ int main(){
           // THIS IS THE CHILD PROCESS
           int firstborn = fork();
           if (!firstborn){
-            printf("-------------------------------\nTESTING USING EXECVP:\n");
+          printf("-------------------------------\nTESTING USING EXECVP:\n");
             execvp(arr[i],arr);
             return 0;
           }
           //THIS IS THE PARENT PROCESS
           else {
+            // if (redirect_num == 2) { // stdout to file is 2
+            //   int file_desc0 = open( "file.txt", O_WRONLY | O_TRUNC);
+            //   dup2( file_desc0, 1);
+            //   printf("tofile??\n");
+            // }
             int child_id = wait(&status);
           }
         }
