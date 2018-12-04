@@ -128,7 +128,7 @@ Returns: void
 
 Takes a string, separates the arguments, runs the
 first process and redirects stdout into the given
-file. (only works with no spaces in char pointer)
+file.
 ====================*/
 int redirect_output(char * line) {
     fflush(stdout);
