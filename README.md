@@ -89,7 +89,7 @@ shell.c
         Given a command, it will separate the string into
         two arrays, what is before and after the '<'. 
 	It will then run the first array from the results 
-	of the second array.
+	of the second array. (not functional)
         ====================*/
 main.c
 
