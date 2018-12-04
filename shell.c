@@ -8,11 +8,24 @@
 #include <sys/wait.h>
 #include <limits.h>
 
+
+char * trim_white(char * s) {
+  // while (*s==' ') {
+  //   s++;
+  // }
+  //
+  // int end=strlen(s)-1;
+  // while (s[end]==' ' || s[end] == '\n')
+  //   s[end--]=0;
+  return s;
+}
+
 char * command_line() {
   char * prompt=(char *)calloc(256,1);
   printf("$ " );
   fgets(prompt,256,stdin);
   prompt[strlen(prompt)-1] = 0;
+//  prompt = trim_white(prompt);
   return prompt;
 }
 
@@ -101,6 +114,7 @@ int main(){
     char ** full_arr = parse_args(str, ";");
     printf( "full arr: %s\n", full_arr[0]);
     while(full_arr[i]){
+      full_arr[i] = trim_white(full_arr[i]);
       printf("======================\n" );
       printf("full_araaar[%d]: %s\n", i, full_arr[i]);
       int j = 0;
@@ -150,6 +164,7 @@ int main(){
           int firstborn = fork();
           if (!firstborn){
           printf("-------------------------------\nTESTING USING EXECVP:\n");
+            printf("arr[i]%s\n",arr[i] );
             execvp(arr[i],arr);
             return 0;
           }

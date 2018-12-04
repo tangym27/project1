@@ -1,0 +1,12 @@
+echo NORMAL TEST
+ls
+ls -a -l
+echo CD TEST
+cd ..
+pwd
+echo SEMICOLON TEST
+ps ; echo HELLO
+echo PIPE TEST
+ls | wc
+echo EXIT
+exit
