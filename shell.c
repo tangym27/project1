@@ -163,16 +163,16 @@ Takes a string, separates the arguments, reads the
 contents of the given file and redirects them towards
 stdin. (not functional)
 ====================*/
-void redirect_input(char * line) {
-    fflush(stdout);
-    printf("line :%s\n", line );
-    char ** parts = parse_args(line, "<");
-    printf("part1:%s\n",parts[0] );
-    printf("part2:%s\n",parts[1] );
-    int fd=open(parts[1],O_CREAT | O_RDWR,0644);
-    dup(STDIN_FILENO);
-    dup2(fd, STDIN_FILENO);
-    char ** args = parse_args(parts[0], " ");
-    execvp(args[0], args);
-    close(fd);
-}
+// void redirect_input(char * line) {
+//     fflush(stdout);
+//     printf("line :%s\n", line );
+//     char ** parts = parse_args(line, "<");
+//     printf("part1:%s\n",parts[0] );
+//     printf("part2:%s\n",parts[1] );
+//     int fd=open(parts[1],O_CREAT | O_RDWR,0644);
+//     dup(STDIN_FILENO);
+//     dup2(fd, STDIN_FILENO);
+//     char ** args = parse_args(parts[0], " ");
+//     execvp(args[0], args);
+//     close(fd);
+// }
