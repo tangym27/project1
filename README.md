@@ -57,7 +57,7 @@ Files & Function Headers:
 
         Takes a string and determines whether piping or
         redirection is being requested. Returns 1
-	if a '|' is present, returns 2 if a '>' is present,
+        if a '|' is present, returns 2 if a '>' is present,
         returns 3 if a '<' is present.
         ====================*/
 	
@@ -79,19 +79,19 @@ Files & Function Headers:
 
         Given a command, it will separate the string into
         two arrays, what is before and after the '>'. 
-	It will then direct the output of the first array
-	into the second array.
+        It will then direct the output of the first array
+        into the second array.
         ====================*/
 	
 	/*======== int * redirect_stdin() ==========
-	Header: int redirect_output(char * line);
+        Header: int redirect_output(char * line);
         Inputs: char * line
         Returns: 0
 
         Given a command, it will separate the string into
         two arrays, what is before and after the '<'. 
-	It will then run the first array from the results 
-	of the second array. (not functional)
+        It will then run the first array from the results 
+        of the second array. (not functional)
         ====================*/
 	
 #### main.c
