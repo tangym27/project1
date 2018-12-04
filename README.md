@@ -17,7 +17,6 @@
 * Multiple pipes. 
 
 ### Bugs:
-* Redirection (> and <) only works when arg is given with no spaces (ie. w>foo or wc<file.txt)
 
 ### Files & Function Headers:
 
@@ -97,7 +96,7 @@
         Given a command, it will separate the string into
         two arrays, what is before and after the '<'. 
         It will then run the first array from the results 
-        of the second array. (not functional)
+        of the second array.
         ====================*/
 	
 #### main.c
