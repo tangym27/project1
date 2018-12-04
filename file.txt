@@ -1,2 +1,2 @@
-tofile??
+cat > file.txt
 $ 
