@@ -2,19 +2,20 @@
 # by Maia Brydon and Michelle Tang 
 
 Features:
-	⋅⋅*Compiles!
-	⋅⋅*Forks and executes commands!
-	⋅⋅*Separates multiple commands on one line!
-	⋅⋅*Can handle simple pipes!
+* Compiles!
+* Forks and executes commands!
+* Separates multiple commands on one line!
+* Can handle simple pipes!
 
 Attempted:
-	⋅⋅* Could not get redirection from file to stdin (<) to work
+* Could not get redirection from file to stdin (<) to work
 
 Bugs:
-	⋅⋅* Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
+* Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
 	
 Files & Function Headers:
-shell.c
+
+#### shell.c
 	Handles a lot of things. It's so shellfish. 
 	
 	/*======== char * trimwhite() ==========
@@ -92,7 +93,8 @@ shell.c
 	It will then run the first array from the results 
 	of the second array. (not functional)
         ====================*/
-main.c
+	
+#### main.c
 
 	/*======== char * main() ==========
 	Header: int main();
