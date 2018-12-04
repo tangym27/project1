@@ -2,10 +2,10 @@
 # by Maia Brydon and Michelle Tang 
 
 Features:
-	Compiles!
-	Forks and executes commands!
-	Separates multiple commands on one line!
-	Can handle simple pipes!
+	*Compiles!
+	*Forks and executes commands!
+	*Separates multiple commands on one line!
+	*Can handle simple pipes!
 
 Attempted:
 	
@@ -18,23 +18,26 @@ shell.c
 	Handles everything. It's so shellfish. 
 	
 	/*======== char * trimwhite() ==========
+	Header: char * trim_white(char * str);
         Inputs: char * str
         Returns: String with excess whitespace eliminated
 
-        Takes a string and removes the excess spaces, then
+        Takes a string and removes the excess spaces (front and back), then
         returns the string.
         ====================*/
 	
 	/*======== char * command_line() ==========
+	Header: char * command_line();
         Inputs: none
-        Returns: Array of the command lines args given
+        Returns: String of the command lines args given
 
         Prints shell prompt according to user's computer,
         then takes command line arguments from stdin and
         returns them in a char array.
         ====================*/
 	
-	/*======== char * parse_args() ==========
+	/*======== char ** parse_args() ==========
+	Header: char ** parse_args( char * line, char * limit );
         Inputs: char * line
                 char * limit
         Returns: Array of strings, or tokens, separated
@@ -44,7 +47,8 @@ shell.c
         given, then returns an array of those tokens.
         ====================*/
 	
-        /*======== char * special() ==========
+        /*======== int find_redirect() ==========
+	Header: int find_redirect(char * args);
         Inputs: char * args
         Returns: Int corresponding to which special
         character is present
@@ -55,7 +59,8 @@ shell.c
         returns 3 if a '<' is present.
         ====================*/
 	
-	/*======== char * redirect_pipe() ==========
+	/*======== int * redirect_pipe() ==========
+	Header: int redirect_pipe(char ** args);
         Inputs: char ** args
         Returns: 0
 
@@ -65,7 +70,30 @@ shell.c
         for arg 1. Returns 0.
         ====================*/
 	
+	/*======== int * redirect_stdout() ==========
+	Header: int redirect_input(char * line);
+        Inputs: char * line
+        Returns: 0
+
+        Given a command, it will separate the string into
+        two arrays, what is before and after the '>'. 
+	It will then direct the output of the first array
+	into the second array.
+        ====================*/
+	
+	/*======== int * redirect_stdin() ==========
+	Header: int redirect_output(char * line);
+        Inputs: char * line
+        Returns: 0
+
+        Given a command, it will separate the string into
+        two arrays, what is before and after the '<'. 
+	It will then run the first array from the results 
+	of the second array.
+        ====================*/
+	
 	/*======== char * main() ==========
+	Header: int main();
         Inputs: none
         Returns: 0 (if exited)
 
