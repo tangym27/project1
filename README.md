@@ -10,7 +10,7 @@
 
 ### Additional Features:
 * Compiles!
-* Handles white space (in front and back as well as between arguments '''       ls      ;      ps      ''' will work.
+* Handles white space (in front and back as well as between arguments ```       ls      ;      ps      ``` will work.
 
 ### Attempted:
 * Could not get redirection from file to stdin (<) to work
