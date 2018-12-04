@@ -1,5 +1,5 @@
-#ifndef HEADER_FILE
-#define HEADER_FILE
+// #ifndef HEADER_FILE
+// #define HEADER_FILE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,10 +15,13 @@
 char * trim_white(char * str);
 char * command_line();
 char ** parse_args( char * line, char * limit );
-int special(char * args);
+
 int redirect_pipe(char ** args);
 int find_redirect(char * args);
 void redirect_input(char * line);
 void redirect_output(char * line);
 
-#endif
+// void redirect_output(char * line);
+int main();
+//
+// #endif

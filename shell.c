@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <signal.h>
-#include <string.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <limits.h>
-#include <pwd.h>
+#include "shell.h"
 
 /*======== char * trimwhite() ==========
 Inputs: char * str
@@ -141,18 +132,19 @@ file. (only works with no spaces in char pointer)
 ====================*/
 void redirect_output(char * line) {
     fflush(stdout);
+    int file;
     // printf("line %s\n", line );
-    char ** parts = parse_args(line, ">");
+    char ** arg = parse_args(line, ">");
     // printf("part1:%s\n",parts[0] );
     // printf("part2:%s\n",parts[1] );
 
-    int fd = open(parts[1], O_CREAT | O_WRONLY | O_TRUNC, 0666);
+    file = open(arg[1], O_CREAT | O_WRONLY , 0644);
     dup(STDOUT_FILENO);
-    dup2(fd, STDOUT_FILENO);
-    char ** args = parse_args(parts[0], " ");
+    dup2(file, STDOUT_FILENO);
+    char ** args = parse_args(arg[0], " ");
     //printf("oUTPUT HERE\n" );
     execvp(args[0], args);
-    close(fd);
+    close(file);
 }
 
 /*======== char * redirect_input() ==========
@@ -165,14 +157,35 @@ stdin. (not functional)
 ====================*/
 // void redirect_input(char * line) {
 //     fflush(stdout);
+//     int file;
 //     printf("line :%s\n", line );
 //     char ** parts = parse_args(line, "<");
 //     printf("part1:%s\n",parts[0] );
 //     printf("part2:%s\n",parts[1] );
-//     int fd=open(parts[1],O_CREAT | O_RDWR,0644);
+//     file=open(parts[1], O_RDONLY, 0644);
 //     dup(STDIN_FILENO);
-//     dup2(fd, STDIN_FILENO);
+//     dup2(file, STDIN_FILENO);
 //     char ** args = parse_args(parts[0], " ");
 //     execvp(args[0], args);
-//     close(fd);
+//     close(file);
 // }
+
+void redirect_input(char * line) {
+  fflush(stdout);
+
+    char ** parts = parse_args(line, "<");
+    fflush(stdout);
+
+    int fd = open(parts[1], O_RDONLY);
+    dup(STDIN_FILENO);
+    dup2(fd, STDIN_FILENO);
+  //  printf("i got sshere\n" );
+  fflush(stdout);
+
+    char ** args = parse_args(parts[0], " ");
+    fflush(stdout);
+
+  //  printf("args[1]%s\n",args[0] );
+    execvp(args[0], args);
+    close(fd);
+}

@@ -1,15 +1,14 @@
 all: main.o shell.o
-	gcc -o ./a.out main.o shell.o
+	gcc main.o shell.o
 
-shell.o: shell.h main.c
-		gcc -c -g shell.c
-
-main.o: main.c shell.h
+main.o: main.c
 	gcc -c -g main.c
+
+shell.o: shell.c shell.h
+	gcc -c -g shell.c
 
 run:
 	./a.out
+
 clean:
-	rm *.out
-	rm *.o
-	rm *.txt
+	rm -rf *.o a.out
