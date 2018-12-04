@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/*======== char * main() ==========
+/*======== int * main() ==========
         Inputs: none
         Returns: 0 (if exited)
 
@@ -30,7 +30,6 @@ int main(){
           redirect_pipe(full_arr2);
     }
     else{
-    //  printf("oh no \n" );
       char ** arr = parse_args(full_arr[i] , " ");
 
       // while(arr[j]){
@@ -53,11 +52,9 @@ int main(){
                 redirect_output(arr[i]);
               }
               else if (redirect_num == 3){
-                printf("burps\n" );
                 redirect_input(arr[i]);
               }
               else{
-                //arr = parse_args(full_arr[i] , " ");
                 execvp(arr[0],arr);
                 return 0;
               }
@@ -71,6 +68,6 @@ int main(){
     i++;
   }
 }
-  //printf("finished the full_arr\n");
+  printf("finished the full_arr\n");
   return 0;
 }

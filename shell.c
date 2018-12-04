@@ -8,11 +8,11 @@ Takes a string and removes the excess spaces, then
 returns the string.
 ====================*/
 char * trim_white(char * str) {
-  while (*str==' ') {
+  while (*str==' ') { // handles white space before a string
     str++;
   }
   int i = strlen(str)-1;
-  for (; i > 1 ; i--){
+  for (; i > 1 ; i--){ // handles white space after a string
     if (str[i]==' ' || str[i] == '\n' ){
       str[i] = 0;
     }
@@ -34,12 +34,12 @@ returns them in a char array.
 char * command_line() {
   char *host = malloc(256);
   gethostname(host, 255);
-  struct passwd *user = getpwuid(getuid());
+  struct passwd *user = getpwuid(getuid()); // for display name
 
   char * prompt=(char *)calloc(256,1);
   printf("(M&M) %s: %s $ ", host, user->pw_name);
-  fflush(stdout);
-  fgets(prompt,256,stdin);
+  fflush(stdout); // because we did not use a new line before
+  fgets(prompt,256,stdin); // receive prompt from user
   prompt[strlen(prompt)-1] = 0;
   return prompt;
 }
@@ -92,7 +92,7 @@ int redirect_pipe(char ** args){
     pclose(read);
     FILE *write=popen(output,"w");
 
-    fprintf(write,"%s",cmd); //send s to write
+    fprintf(write,"%s",cmd); //send s to write, print from the file
     pclose(write);
     return 0;
 }
@@ -108,15 +108,15 @@ returns 3 if a '<' is present.
 ====================*/
 int find_redirect(char * args){
   if(strstr(args,"|")){
-    printf("there is a pipe here\n" );
+  //  printf("there is a pipe here\n" );
     return 1;
   }
   if(strstr(args,">")){
-    printf("redirecting stdout to file\n");
+  //  printf("redirecting stdout to file\n");
     return 2;
   }
   if(strstr(args,"<")){
-    printf("redirecting file to stdin\n");
+  //  printf("redirecting file to stdin\n");
     return 3;
   }
   return 0;
@@ -130,11 +130,11 @@ Takes a string, separates the arguments, runs the
 first process and redirects stdout into the given
 file. (only works with no spaces in char pointer)
 ====================*/
-void redirect_output(char * line) {
+int redirect_output(char * line) {
     fflush(stdout);
     int file;
     // printf("line %s\n", line );
-    char ** arg = parse_args(line, ">");
+    char ** arg = parse_args(line, ">"); // seperates argument by the >
     // printf("part1:%s\n",parts[0] );
     // printf("part2:%s\n",parts[1] );
 
@@ -143,8 +143,9 @@ void redirect_output(char * line) {
     dup2(file, STDOUT_FILENO);
     char ** args = parse_args(arg[0], " ");
     //printf("oUTPUT HERE\n" );
-    execvp(args[0], args);
+    execvp(args[0], args); // then executes it
     close(file);
+    return 0;
 }
 
 /*======== char * redirect_input() ==========
@@ -155,37 +156,21 @@ Takes a string, separates the arguments, reads the
 contents of the given file and redirects them towards
 stdin. (not functional)
 ====================*/
-// void redirect_input(char * line) {
-//     fflush(stdout);
-//     int file;
-//     printf("line :%s\n", line );
-//     char ** parts = parse_args(line, "<");
-//     printf("part1:%s\n",parts[0] );
-//     printf("part2:%s\n",parts[1] );
-//     file=open(parts[1], O_RDONLY, 0644);
-//     dup(STDIN_FILENO);
-//     dup2(file, STDIN_FILENO);
-//     char ** args = parse_args(parts[0], " ");
-//     execvp(args[0], args);
-//     close(file);
-// }
 
-void redirect_input(char * line) {
-  fflush(stdout);
-
-    char ** parts = parse_args(line, "<");
+int redirect_input(char * line) {
     fflush(stdout);
 
-    int fd = open(parts[1], O_RDONLY);
+    char ** arg = parse_args(line, "<"); // seperates argument by the <
+    fflush(stdout);
+    char ** args = parse_args(arg[0], " "); //to create an array of strings to execute later
+
+    int fd = open(arg[1], O_RDONLY, 0644);
     dup(STDIN_FILENO);
     dup2(fd, STDIN_FILENO);
-  //  printf("i got sshere\n" );
-  fflush(stdout);
-
-    char ** args = parse_args(parts[0], " ");
+  //  printf("debug here...\n" );
     fflush(stdout);
-
   //  printf("args[1]%s\n",args[0] );
     execvp(args[0], args);
     close(fd);
+    return 0;
 }

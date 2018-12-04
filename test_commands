@@ -1,2 +1,21 @@
-./a.out
-(M&M) Michelles-MBP.home: mtang $ 
+echo NORMAL TEST
+ls
+ls -a -l
+echo CD TEST
+cd ..
+pwd
+echo SEMICOLON TEST
+ps ; echo HELLO
+echo STDOUT REDIRECT TEST
+w>wholist
+cat wholist
+echo STDIN REDIRECT TEST
+wc<wholist
+echo DOUBLE REDIRECT TEST
+echo FAILS
+cat foo
+echo PIPE TEST
+ls | wc
+rm wholist foo
+echo EXIT
+exit
