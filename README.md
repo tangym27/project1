@@ -2,23 +2,24 @@
 # by Maia Brydon and Michelle Tang 
 
 Features:
-	*Compiles!
-	*Forks and executes commands!
-	*Separates multiple commands on one line!
-	*Can handle simple pipes!
+	⋅⋅*Compiles!
+	⋅⋅*Forks and executes commands!
+	⋅⋅*Separates multiple commands on one line!
+	⋅⋅*Can handle simple pipes!
 
 Attempted:
-	*Could not get redirection from file to stdin (<) to work
+	⋅⋅* Could not get redirection from file to stdin (<) to work
 
 Bugs:
-	*Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
+	⋅⋅* Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
 	
 Files & Function Headers:
 shell.c
-	Handles everything. It's so shellfish. 
+	Handles a lot of things. It's so shellfish. 
 	
 	/*======== char * trimwhite() ==========
-	Header: char * trim_white(char * str);
+	
+        Header: char * trim_white(char * str)
         Inputs: char * str
         Returns: String with excess whitespace eliminated
 
@@ -27,7 +28,7 @@ shell.c
         ====================*/
 	
 	/*======== char * command_line() ==========
-	Header: char * command_line();
+        Header: char * command_line();
         Inputs: none
         Returns: String of the command lines args given
 
@@ -37,7 +38,7 @@ shell.c
         ====================*/
 	
 	/*======== char ** parse_args() ==========
-	Header: char ** parse_args( char * line, char * limit );
+        Header: char ** parse_args( char * line, char * limit );
         Inputs: char * line
                 char * limit
         Returns: Array of strings, or tokens, separated
@@ -48,7 +49,7 @@ shell.c
         ====================*/
 	
         /*======== int find_redirect() ==========
-	Header: int find_redirect(char * args);
+        Header: int find_redirect(char * args);
         Inputs: char * args
         Returns: Int corresponding to which special
         character is present
@@ -60,7 +61,7 @@ shell.c
         ====================*/
 	
 	/*======== int * redirect_pipe() ==========
-	Header: int redirect_pipe(char ** args);
+        Header: int redirect_pipe(char ** args);
         Inputs: char ** args
         Returns: 0
 
@@ -71,7 +72,7 @@ shell.c
         ====================*/
 	
 	/*======== int * redirect_stdout() ==========
-	Header: int redirect_input(char * line);
+        Header: int redirect_input(char * line);
         Inputs: char * line
         Returns: 0
 
