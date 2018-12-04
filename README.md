@@ -8,10 +8,10 @@ Features:
 	*Can handle simple pipes!
 
 Attempted:
-	
+	*Could not get redirection from file to stdin (<) to work
 
 Bugs:
-	
+	*Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
 	
 Files & Function Headers:
 shell.c
@@ -91,7 +91,8 @@ shell.c
 	It will then run the first array from the results 
 	of the second array.
         ====================*/
-	
+main.c
+
 	/*======== char * main() ==========
 	Header: int main();
         Inputs: none
