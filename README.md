@@ -97,7 +97,7 @@ Files & Function Headers:
 #### main.c
 
 	/*======== char * main() ==========
-	Header: int main();
+        Header: int main();
         Inputs: none
         Returns: 0 (if exited)
 
