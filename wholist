@@ -1,6 +1,0 @@
- 2:44  up  7:59, 4 users, load averages: 1.44 1.49 1.49
-USER     TTY      FROM              LOGIN@  IDLE WHAT
-mtang    console  -                Mon18    7:58 -
-mtang    s000     -                 1:26      51 ./a.out
-mtang    s001     -                 2:06       - ./a.out
-mtang    s002     -                 2:44       - w
