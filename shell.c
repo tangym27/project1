@@ -138,7 +138,7 @@ int redirect_output(char * line) {
     // printf("part1:%s\n",parts[0] );
     // printf("part2:%s\n",parts[1] );
 
-    file = open(arg[1], O_CREAT | O_WRONLY , 0644);
+    file = open(trim_white(arg[1]), O_CREAT | O_WRONLY , 0644);
     dup(STDOUT_FILENO);
     dup2(file, STDOUT_FILENO);
     char ** args = parse_args(arg[0], " ");

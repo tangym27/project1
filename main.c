@@ -30,7 +30,9 @@ int main(){
           redirect_pipe(full_arr2);
     }
     else{
-      char ** arr = parse_args(full_arr[i] , " ");
+      char ** arr = malloc(256);
+      if(!redirect_num){
+      arr = parse_args(full_arr[i] , " ");
 
       // while(arr[j]){
       //   //printf("arr[%d]: %s\n", j, arr[j]);
@@ -39,20 +41,21 @@ int main(){
       if (!strcmp(arr[0], "cd")){
         chdir(arr[1]);
       }
-      else if (!strcmp(arr[0], "exit")){
+      if (!strcmp(arr[0], "exit")){
         return 0;
       }
-      else{
+    }
+    //  else{
 
             // THIS IS THE CHILD PROCESS
             int firstborn = fork();
             if (!firstborn){
               //  printf("-------------------------------\nTESTING USING EXECVP:\n");
               if (redirect_num == 2){
-                redirect_output(arr[i]);
+                redirect_output(full_arr[i]);
               }
               else if (redirect_num == 3){
-                redirect_input(arr[i]);
+                redirect_input(full_arr[i]);
               }
               else{
                 execvp(arr[0],arr);
@@ -63,7 +66,7 @@ int main(){
             else {
               int child_id = wait(&status);
             }
-          }
+  //        }
     }
     i++;
   }
