@@ -162,9 +162,9 @@ int redirect_input(char * line) {
 
     char ** arg = parse_args(line, "<"); // seperates argument by the <
     fflush(stdout);
-    char ** args = parse_args(arg[0], " "); //to create an array of strings to execute later
+    char ** args = parse_args(trim_white(arg[0]), " "); //to create an array of strings to execute later
 
-    int fd = open(arg[1], O_RDONLY, 0644);
+    int fd = open(trim_white(arg[1]), O_RDONLY, 0644);
     dup(STDIN_FILENO);
     dup2(fd, STDIN_FILENO);
   //  printf("debug here...\n" );
