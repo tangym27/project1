@@ -1,2 +1,3 @@
-cat > file.txt
+hi > file.txt
+
 $ 
