@@ -1,0 +1,16 @@
+ foo
+README.md
+a.out
+dir
+file.txt
+foo
+hi
+main.c
+main.o
+makefile
+shell.c
+shell.h
+shell.o
+test_commands
+working_main.c
+working_shell.c

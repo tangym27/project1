@@ -141,7 +141,7 @@ int redirect_output(char * line) {
     file = open(trim_white(arg[1]), O_CREAT | O_WRONLY , 0644);
     dup(STDOUT_FILENO);
     dup2(file, STDOUT_FILENO);
-    char ** args = parse_args(arg[0], " ");
+    char ** args = parse_args(trim_white(arg[0]), " ");
     //printf("oUTPUT HERE\n" );
     execvp(args[0], args); // then executes it
     close(file);
