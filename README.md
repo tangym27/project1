@@ -1,19 +1,25 @@
 # Maia and MiSHELL (its like maya and miguel haha)
 # by Maia Brydon and Michelle Tang 
 
-Features:
+### Basic Features (from assignment):
+* Reads a line at a time, parses the line to separate the command from its arguments. It then forks and execs the command. The parent process wait until the exec'd program exits and then it should read the next command.
+* Runs exit and cd 
+* Reads and separates multiple commands on one line with ;. 
+* Implement simple redirection using > (redirecting stdout) and < (redirecting stdin).
+* Implement simple pipes. 
+
+### Additional Features:
 * Compiles!
-* Forks and executes commands!
-* Separates multiple commands on one line!
-* Can handle simple pipes!
+* Handles white space (in front and back as well as between arguments '''       ls      ;      ps      ''' will work.
 
-Attempted:
+### Attempted:
 * Could not get redirection from file to stdin (<) to work
+* Multiple pipes. 
 
-Bugs:
+### Bugs:
 * Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
-	
-Files & Function Headers:
+
+### Files & Function Headers:
 
 #### shell.c
 	Handles a lot of things. It's so shellfish. 
