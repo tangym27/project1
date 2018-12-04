@@ -17,7 +17,7 @@
 * Multiple pipes. 
 
 ### Bugs:
-* Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
+* Redirection (> and <) only works when arg is given with no spaces (ie. w>foo or wc<file.txt)
 
 ### Files & Function Headers:
 
