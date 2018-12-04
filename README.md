@@ -13,11 +13,11 @@
 * Handles white space (in front and back as well as between arguments ```       ls      ;      ps      ``` will work.
 
 ### Attempted:
-* Could not get redirection from file to stdin (<) to work
+* Could not get double redirection (> < in the same line) to work.
 * Multiple pipes. 
 
 ### Bugs:
-* Redirection from stdout to file (>) only works when arg is given with no spaces (ie. w>foo)
+* Redirection (> and <) only works when arg is given with no spaces (ie. w>foo or wc<file.txt)
 
 ### Files & Function Headers:
 
